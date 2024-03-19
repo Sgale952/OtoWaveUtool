@@ -1,9 +1,8 @@
-package github.otowave.otowaveutool.settings;
+package github.otowave.settings;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -11,13 +10,11 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static github.otowave.otowaveutool.settings.SettingsManager.*;
+import static github.otowave.settings.SettingsManager.*;
 
 public class SettingsController implements Initializable {
     @FXML
-    private Button btnSave;
-    @FXML
-    private Text txStatus;
+    private Text ttStatus;
     @FXML
     private TextField tfDefaultDir;
     @FXML

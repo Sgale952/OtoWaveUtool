@@ -1,4 +1,4 @@
-package github.otowave.otowaveutool.settings;
+package github.otowave.settings;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -29,7 +29,7 @@ public class SettingsManager {
 
     public static void saveSettingsFile() {
         try (FileOutputStream out = new FileOutputStream(SETTINGS_FILE)) {
-            properties.store(out, "Application Settings");
+            properties.store(out, "!Change only in the application!");
         }
         catch (IOException e) {
             e.printStackTrace();

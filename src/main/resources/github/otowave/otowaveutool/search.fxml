@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="325.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.otowave.search.SearchController">
+   <Button layoutX="250.0" layoutY="242.0" mnemonicParsing="false" onAction="#search" prefHeight="32.0" prefWidth="101.0" text="SEARCH">
+      <font>
+         <Font name="Arial" size="14.0" />
+      </font>
+   </Button>
+   <Text fx:id="ttStatus" layoutX="253.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="response" textAlignment="CENTER" wrappingWidth="95.0">
+      <font>
+         <Font name="Arial" size="16.0" />
+      </font>
+   </Text>
+   <TextField fx:id="tfSearchPhrase" layoutX="158.0" layoutY="46.0" prefHeight="32.0" prefWidth="287.0" promptText="search phrase">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </TextField>
+   <Separator layoutX="28.0" layoutY="78.0" prefHeight="24.0" prefWidth="546.0" />
+   <TextField fx:id="tfAuthorIds" editable="false" layoutX="158.0" layoutY="102.0" prefHeight="32.0" prefWidth="287.0" promptText="author ids">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </TextField>
+   <TextField fx:id="tfMusicIds" editable="false" layoutX="158.0" layoutY="144.0" prefHeight="32.0" prefWidth="287.0" promptText="music ids">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </TextField>
+   <TextField fx:id="tfAlbumIds" editable="false" layoutX="158.0" layoutY="185.0" prefHeight="32.0" prefWidth="287.0" promptText="album ids">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </TextField>
+</AnchorPane>

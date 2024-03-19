@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="menuRoot" layoutX="-1.0" prefHeight="40.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.otowave.otowaveutool.MenuController">
+    <left>
+        <Button mnemonicParsing="false" onAction="#showSceneAuthor" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 0;" text="author" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="Arial" size="16.0" />
+            </font>
+        </Button>
+    </left>
+    <center>
+        <AnchorPane prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <Button layoutY="1.0" mnemonicParsing="false" onAction="#showSceneMusic" prefHeight="40.0" prefWidth="112.0" style="-fx-background-radius: 0;" text="music">
+                <font>
+                    <Font name="Arial" size="16.0" />
+                </font>
+            </Button>
+            <Button layoutX="112.0" layoutY="1.0" mnemonicParsing="false" onAction="#showSceneAlbum" prefHeight="40.0" prefWidth="113.0" style="-fx-background-radius: 0;" text="album">
+                <font>
+                    <Font name="Arial" size="16.0" />
+                </font>
+            </Button>
+        </AnchorPane>
+    </center>
+   <right>
+      <AnchorPane prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="-25.0" layoutY="1.0" mnemonicParsing="false" onAction="#showSceneSearch" prefHeight="40.0" prefWidth="113.0" style="-fx-background-radius: 0;" text="search">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="88.0" layoutY="1.0" mnemonicParsing="false" onAction="#showSceneSettings" prefHeight="40.0" prefWidth="112.0" style="-fx-background-radius: 0;" text="settings">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

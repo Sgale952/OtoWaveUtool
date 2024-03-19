@@ -1,4 +1,4 @@
-package github.otowave.otowaveutool.application;
+package github.otowave.otowaveutool;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static github.otowave.otowaveutool.settings.SettingsManager.loadSettingsFile;
+import static github.otowave.settings.SettingsManager.loadSettingsFile;
 
 public class Main extends Application {
 
