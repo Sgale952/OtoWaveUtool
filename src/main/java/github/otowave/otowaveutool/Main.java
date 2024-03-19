@@ -9,9 +9,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static github.otowave.settings.SettingsManager.getSetting;
 import static github.otowave.settings.SettingsManager.loadSettingsFile;
 
 public class Main extends Application {
+    private static Scene scene;
+    private static String themeDir = "github/otowave/themes/";
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -25,11 +28,19 @@ public class Main extends Application {
 
         menuRoot.setBottom(welcomeRoot);
 
-        Scene scene = new Scene(menuRoot, 600, 365);
+        scene = new Scene(menuRoot, 600, 365);
+        updateSceneTheme();
+
         stage.setResizable(false);
-        stage.setTitle("OtoWaveUtool");
+        stage.setTitle("OtoWave upload tool");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void updateSceneTheme() {
+        String theme = getSetting("theme");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(themeDir+theme+".css");
     }
 
     public static void main(String[] args) {

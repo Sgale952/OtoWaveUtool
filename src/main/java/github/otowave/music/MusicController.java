@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
@@ -22,10 +23,12 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import static github.otowave.data.DataHandler.getGenres;
-import static github.otowave.otowaveutool.CommonUtils.convertBooleanToInt;
-import static github.otowave.otowaveutool.CommonUtils.getPath;
+import static github.otowave.otowaveutool.CommonUtils.*;
+import static github.otowave.settings.SettingsManager.getSetting;
 
 public class MusicController implements Initializable {
+    @FXML
+    private ImageView ivSticker;
     @FXML
     private MenuButton btnGenreMenu;
     @FXML
@@ -46,6 +49,8 @@ public class MusicController implements Initializable {
             radioMenuItem.setToggleGroup(genreToggleGroup);
             btnGenreMenu.getItems().add(radioMenuItem);
         }
+
+        setThemeSticker(getSetting("theme"), ivSticker);
     }
 
     public void upload(ActionEvent actionEvent) {
@@ -65,7 +70,7 @@ public class MusicController implements Initializable {
     }
 
     public void setMetadata(ActionEvent actionEvent) {
-        File audioFile = new File(getPath(tfMusicPath.getText()));
+        File audioFile = new File(getUploadPath(tfMusicPath.getText()));
 
         try {
             AudioFile audio = AudioFileIO.read(audioFile);

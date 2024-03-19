@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class SettingsManager {
 
-    private static final String SETTINGS_FILE = "settings.properties";
+    private static final String SETTINGS_FILE = "Utool.properties";
     private static final Properties properties = new Properties();
 
     public static void loadSettingsFile() {
@@ -18,7 +18,6 @@ public class SettingsManager {
         }
         catch (IOException e) {
             if (!Files.exists(Paths.get(SETTINGS_FILE))) {
-                saveSettingsFile();
                 setDefaultSettings();
             }
             else {
@@ -44,6 +43,7 @@ public class SettingsManager {
         setSetting("databasePassword", "");
         setSetting("theme", "default");
         setSetting("enableAnimation", "true");
+        saveSettingsFile();
     }
 
     public static String getSetting(String key) {

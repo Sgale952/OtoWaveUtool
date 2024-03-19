@@ -1,0 +1,44 @@
+/* theme_dark.css */
+
+/* Установка фонового цвета для корневого узла */
+.root {
+    -fx-background-color: #333333;
+}
+
+/* Установка цвета текста для всех элементов */
+.text {
+    -fx-text-fill: white;
+}
+
+/* Стилизация кнопок */
+.button {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+    -fx-border-color: #666666;
+}
+
+.button:hover {
+    -fx-background-color: #999999;
+    -fx-text-fill: white;
+    -fx-border-color: #999999;
+}
+
+/* Стилизация ссылок */
+.hyperlink {
+    -fx-text-fill: #009688;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #00bcd4;
+}
+
+/* Стилизация текстовых полей */
+.text-field {
+    -fx-background-color: #666666;
+    -fx-text-fill: white;
+}
+
+/* Стилизация чекбоксов */
+.check-box {
+    -fx-text-fill: white;
+}

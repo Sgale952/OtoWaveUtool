@@ -3,8 +3,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -35,6 +37,19 @@
       <font>
          <Font size="14.0" />
       </font>
+      <items>
+         <RadioMenuItem mnemonicParsing="false" text="default">
+            <toggleGroup>
+               <ToggleGroup fx:id="themes" />
+            </toggleGroup>
+         </RadioMenuItem>
+         <RadioMenuItem mnemonicParsing="false" text="sky" toggleGroup="$themes" />
+         <RadioMenuItem mnemonicParsing="false" text="aqua" toggleGroup="$themes" />
+         <RadioMenuItem mnemonicParsing="false" text="peach" toggleGroup="$themes" />
+         <RadioMenuItem mnemonicParsing="false" text="oni" toggleGroup="$themes" />
+         <RadioMenuItem mnemonicParsing="false" text="onigiri" toggleGroup="$themes" />
+         <RadioMenuItem mnemonicParsing="false" text="toxic" toggleGroup="$themes" />
+      </items>
    </MenuButton>
    <TextField fx:id="tfDbUrl" layoutX="32.0" layoutY="121.0" prefHeight="32.0" prefWidth="287.0" promptText="database url">
       <font>

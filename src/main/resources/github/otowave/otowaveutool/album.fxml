@@ -34,8 +34,7 @@
          <Font size="14.0" />
       </font>
    </TextField>
-   <ImageView fitHeight="150.0" fitWidth="172.0" layoutX="425.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@/github/otowave/stickers/default/wait.png" />
+   <ImageView fx:id="ivSticker" fitHeight="150.0" fitWidth="172.0" layoutX="425.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
    </ImageView>
    <Button layoutX="35.0" layoutY="23.0" mnemonicParsing="false" onAction="#clearValues" prefHeight="20.0" prefWidth="101.0" text="clear">
       <font>
