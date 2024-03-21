@@ -4,6 +4,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -66,5 +67,8 @@
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip text="Устанавливает метаданные музыки для создания плейлиста" />
+      </tooltip>
    </Button>
 </AnchorPane>

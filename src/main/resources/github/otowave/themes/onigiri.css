@@ -1,11 +1,11 @@
 * {
-    -fx-background: #f8f4ec;
-    -fx-button: #11235A;
-    -fx-button-hover: #596FB7;
-    -fx-text: #f8f4ec;
-    -fx-text-contrast: #ee99c2;
-    -fx-text-field: #ee99c2;
-    -fx-separator: #0c359e;
+    -fx-background: #FFE6E6;
+    -fx-button: #3B3486;
+    -fx-button-hover: #AD88C6;
+    -fx-text: #FFE6E6;
+    -fx-text-contrast: #7469B6;
+    -fx-text-field: #7469B6;
+    -fx-separator: #F8E559;
 }
 
 .root {

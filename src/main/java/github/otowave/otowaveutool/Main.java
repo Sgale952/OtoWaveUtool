@@ -14,7 +14,7 @@ import static github.otowave.settings.SettingsManager.loadSettingsFile;
 
 public class Main extends Application {
     private static Scene scene;
-    private static String themeDir = "github/otowave/themes/";
+    private static final String themeDir = "github/otowave/themes/";
 
     @Override
     public void start(Stage stage) throws IOException {

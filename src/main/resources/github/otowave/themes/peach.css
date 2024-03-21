@@ -1,11 +1,11 @@
 * {
-    -fx-background: #f8f4ec;
-    -fx-button: #11235A;
-    -fx-button-hover: #596FB7;
-    -fx-text: #f8f4ec;
-    -fx-text-contrast: #ee99c2;
-    -fx-text-field: #ee99c2;
-    -fx-separator: #0c359e;
+    -fx-background: #FBF3D5;
+    -fx-button: #FFB38E;
+    -fx-button-hover: #FF8E8F;
+    -fx-text: #FBF3D5;
+    -fx-text-contrast: #D9EDBF;
+    -fx-text-field: #D9EDBF;
+    -fx-separator: #FFCF81;
 }
 
 .root {
@@ -67,7 +67,7 @@
 }
 
 .tooltip {
-    -fx-text-fill: -fx-text-contrast;
+    -fx-text-fill: -fx-text;
     -fx-background-color: -fx-separator;
     -fx-background-radius: 0;
     -fx-font-size: 0.85em;
