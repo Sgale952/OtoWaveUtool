@@ -28,7 +28,7 @@ public class SettingsManager {
 
     public static void saveSettingsFile() {
         try (FileOutputStream out = new FileOutputStream(SETTINGS_FILE)) {
-            properties.store(out, "!Change only in the application!");
+            properties.store(out, "OtoWave upload tool's config file\nChange only in the application!");
         }
         catch (IOException e) {
             e.printStackTrace();
