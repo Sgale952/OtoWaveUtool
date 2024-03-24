@@ -14,7 +14,6 @@ public class DataHandler {
     static final OkHttpClient client = new OkHttpClient();
     static final Gson gson = new Gson();
     static final String baseUrl = "http://0.0.0.0:4567/";
-    static final Boolean isUsedDefaultDir = Boolean.parseBoolean(getSetting("useDefaultDir"));
 
     public static void uploadAuthor() {
     }

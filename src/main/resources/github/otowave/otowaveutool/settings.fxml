@@ -51,17 +51,12 @@
          <RadioMenuItem mnemonicParsing="false" text="toxic" toggleGroup="$themes" />
       </items>
    </MenuButton>
-   <TextField fx:id="tfDbUrl" layoutX="32.0" layoutY="121.0" prefHeight="32.0" prefWidth="287.0" promptText="database url">
+   <TextField fx:id="tfEmail" layoutX="32.0" layoutY="121.0" prefHeight="32.0" prefWidth="95.0" promptText="email">
       <font>
          <Font size="14.0" />
       </font>
    </TextField>
-   <TextField fx:id="tfDbUser" layoutX="329.0" layoutY="121.0" prefHeight="32.0" prefWidth="84.0" promptText="user">
-      <font>
-         <Font size="14.0" />
-      </font>
-   </TextField>
-   <TextField fx:id="tfDbPassword" layoutX="424.0" layoutY="121.0" prefHeight="32.0" prefWidth="132.0" promptText="password">
+   <TextField fx:id="tfPassword" layoutX="134.0" layoutY="121.0" prefHeight="32.0" prefWidth="132.0" promptText="password">
       <font>
          <Font size="14.0" />
       </font>

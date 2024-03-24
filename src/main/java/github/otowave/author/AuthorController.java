@@ -22,25 +22,35 @@ public class AuthorController implements Initializable {
     private ImageView ivSticker;
     @FXML
     private TextField tfNickname, tfEmail, tfAvatarPath, tfHeaderPath, tfPassword;
+    private Boolean isUseDefaultDir;
+    private String avatarId;
+    private String headerId;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        isUseDefaultDir = Boolean.parseBoolean(getSetting("useDefaultDir"));
         setThemeSticker(getSetting("theme"), ivSticker);
     }
 
     public void upload(ActionEvent actionEvent) {
         String nickname = tfNickname.getText();
         String email = tfEmail.getText();
-        String Password = tfPassword.getText();
+        String password = tfPassword.getText();
 
-        uploadUser(nickname, email, Password);
+        String uploaderId = uploadUser(nickname, email, password);
 
         String avatarFile = tfAvatarPath.getText();
         String headerFile = tfAvatarPath.getText();
-        String uploaderId = "";
 
-        String avatarId = uploadImage("userAvatar", avatarFile, uploaderId);
-        String headerId = uploadImage("userHeader", headerFile, uploaderId);
+        if(isUseDefaultDir) {
+            avatarFile = getSetting("defaultDir") + avatarFile;
+            headerFile = getSetting("defaultDir") + headerFile;
+        }
+
+        avatarId = uploadImage(uploaderId, "userAvatar", avatarFile);
+        headerId = uploadImage(uploaderId, "userHeader", headerFile);
     }
 
     public void clearValues(ActionEvent actionEvent) {

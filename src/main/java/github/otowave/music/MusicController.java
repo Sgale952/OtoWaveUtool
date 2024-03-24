@@ -23,6 +23,9 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import static github.otowave.data.DataHandler.getGenres;
+import static github.otowave.data.ImageDataHandler.uploadImage;
+import static github.otowave.data.MusicDataHandler.uploadMusic;
+import static github.otowave.music.MusicManager.getToggledGenre;
 import static github.otowave.otowaveutool.CommonUtils.*;
 import static github.otowave.settings.SettingsManager.getSetting;
 
@@ -37,24 +40,40 @@ public class MusicController implements Initializable {
     private TextField tfTitle, tfAuthor, tfMusicPath, tfCoverPath;
     @FXML
     private CheckBox chbEcontent;
+    private final ToggleGroup genreToggleGroup = new ToggleGroup();
+    private Boolean isUseDefaultDir;
     private String lastMusicId;
+    private String lastImageId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ToggleGroup genreToggleGroup = new ToggleGroup();
         HashMap<Integer, String> genresMap = getGenres();
-
         for (HashMap.Entry<Integer, String> entry : genresMap.entrySet()) {
             RadioMenuItem radioMenuItem = new RadioMenuItem(entry.getValue());
             radioMenuItem.setToggleGroup(genreToggleGroup);
             btnGenreMenu.getItems().add(radioMenuItem);
         }
 
+        isUseDefaultDir = Boolean.parseBoolean(getSetting("useDefaultDir"));
+
         setThemeSticker(getSetting("theme"), ivSticker);
     }
 
     public void upload(ActionEvent actionEvent) {
-        //MusicData musicData = new MusicData();
+        String authorId = tfAuthor.getText();
+        String title = tfTitle.getText();
+        String eContent = chbEcontent.isSelected()? "1" : "0";
+        String genre = getToggledGenre(genreToggleGroup);
+        String audioFilePath = tfMusicPath.getText();
+        String imageFilePath = tfCoverPath.getText();
+
+        if(isUseDefaultDir) {
+            audioFilePath = getSetting("defaultDir") + audioFilePath;
+            imageFilePath = getSetting("defaultDir") + imageFilePath;
+        }
+
+        lastMusicId = uploadMusic(authorId, title, eContent, genre, audioFilePath);
+        lastImageId = uploadImage(authorId, "musicCover", imageFilePath);
     }
 
     public void deleteLastUploaded(ActionEvent actionEvent) {

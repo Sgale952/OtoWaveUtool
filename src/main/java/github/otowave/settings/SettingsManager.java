@@ -38,9 +38,8 @@ public class SettingsManager {
     private static void setDefaultSettings() {
         setSetting("useDefaultDir", "false");
         setSetting("defaultDir", "");
-        setSetting("databaseUrl", "");
-        setSetting("databaseUser", "");
-        setSetting("databasePassword", "");
+        setSetting("email", "");
+        setSetting("password", "");
         setSetting("theme", "default");
         setSetting("enableAnimation", "true");
         saveSettingsFile();

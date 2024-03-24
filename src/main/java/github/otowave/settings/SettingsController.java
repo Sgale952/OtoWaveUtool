@@ -23,16 +23,15 @@ public class SettingsController implements Initializable {
     @FXML
     private CheckBox chbDefaultDir, chbEnableAnim;
     @FXML
-    private TextField tfDbUrl, tfDbUser, tfDbPassword;
+    private TextField tfEmail, tfPassword;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         chbDefaultDir.setSelected(Boolean.parseBoolean(getSetting("useDefaultDir")));
         tfDefaultDir.setText(getSetting("defaultDir"));
 
-        tfDbUrl.setText(getSetting("databaseUrl"));
-        tfDbUser.setText(getSetting("databaseUser"));
-        tfDbPassword.setText(getSetting("databasePassword"));
+        tfEmail.setText(getSetting("databaseUser"));
+        tfPassword.setText(getSetting("databasePassword"));
 
         setToggledTheme();
         chbEnableAnim.setSelected(Boolean.parseBoolean(getSetting("enableAnimation")));
@@ -43,9 +42,8 @@ public class SettingsController implements Initializable {
 
         setSetting("useDefaultDir", String.valueOf(chbDefaultDir.isSelected()));
         setSetting("defaultDir", tfDefaultDir.getText());
-        setSetting("databaseUrl", tfDbUrl.getText());
-        setSetting("databaseUser", tfDbUser.getText());
-        setSetting("databasePassword", tfDbPassword.getText());
+        setSetting("email", tfEmail.getText());
+        setSetting("password", tfPassword.getText());
         setSetting("theme", selectedTheme.getText());
         setSetting("enableAnimation", String.valueOf(chbEnableAnim.isSelected()));
         saveSettingsFile();
