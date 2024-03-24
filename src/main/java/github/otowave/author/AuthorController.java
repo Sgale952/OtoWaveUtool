@@ -26,8 +26,6 @@ public class AuthorController implements Initializable {
     private String avatarId;
     private String headerId;
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         isUseDefaultDir = Boolean.parseBoolean(getSetting("useDefaultDir"));

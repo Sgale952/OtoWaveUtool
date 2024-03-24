@@ -97,7 +97,7 @@ public class MusicController implements Initializable {
             Tag tag = audio.getTagOrCreateDefault();
             tag.setField(FieldKey.TITLE, tfTitle.getText());
             tag.setField(FieldKey.ARTIST, tfAuthor.getText());
-            tag.setField(FieldKey.GENRE, "genre");
+            tag.setField(FieldKey.GENRE, getToggledGenre(genreToggleGroup));
             tag.setField(FieldKey.CUSTOM1, String.valueOf(convertBooleanToInt(chbEcontent.isSelected())));
             audio.commit();
         }

@@ -31,7 +31,7 @@
          <Font size="14.0" />
       </font>
    </MenuButton>
-   <TextField fx:id="tfAuthor" layoutX="35.0" layoutY="123.0" prefHeight="39.0" prefWidth="164.0" promptText="author (should be exist)">
+   <TextField fx:id="tfAuthor" layoutX="35.0" layoutY="123.0" prefHeight="39.0" prefWidth="164.0" promptText="author id">
       <font>
          <Font size="14.0" />
       </font>

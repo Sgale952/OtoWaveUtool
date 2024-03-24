@@ -8,8 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
-import static github.otowave.settings.SettingsManager.getSetting;
-
 public class DataHandler {
     static final OkHttpClient client = new OkHttpClient();
     static final Gson gson = new Gson();

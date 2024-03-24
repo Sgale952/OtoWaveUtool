@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="325.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="github.otowave.album.AlbumController">
-   <Button layoutX="252.0" layoutY="243.0" mnemonicParsing="false" onAction="#saveAlbum" prefHeight="32.0" prefWidth="101.0" text="UPLOAD">
+   <Button layoutX="252.0" layoutY="243.0" mnemonicParsing="false" onAction="#upload" prefHeight="32.0" prefWidth="101.0" text="UPLOAD">
       <font>
          <Font name="Arial" size="14.0" />
       </font>
