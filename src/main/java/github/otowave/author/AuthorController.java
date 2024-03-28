@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static github.otowave.data.AuthorDataHandler.uploadUser;
+import static github.otowave.data.ImageDataHandler.applyImage;
 import static github.otowave.data.ImageDataHandler.uploadImage;
 import static github.otowave.otowaveutool.CommonUtils.setThemeSticker;
 import static github.otowave.settings.SettingsManager.getSetting;
@@ -36,19 +37,25 @@ public class AuthorController implements Initializable {
         String nickname = tfNickname.getText();
         String email = tfEmail.getText();
         String password = tfPassword.getText();
-
-        String uploaderId = uploadUser(nickname, email, password);
-
         String avatarFile = tfAvatarPath.getText();
         String headerFile = tfAvatarPath.getText();
-
         if(isUseDefaultDir) {
             avatarFile = getSetting("defaultDir") + avatarFile;
             headerFile = getSetting("defaultDir") + headerFile;
         }
 
-        avatarId = uploadImage(uploaderId, "userAvatar", avatarFile);
-        headerId = uploadImage(uploaderId, "userHeader", headerFile);
+        try {
+            String uploaderId = uploadUser(nickname, email, password);
+
+            avatarId = uploadImage(uploaderId, avatarFile);
+            applyImage(uploaderId, avatarId, uploaderId, "userAvatar");
+
+            headerId = uploadImage(uploaderId, headerFile);
+            applyImage(uploaderId, headerId, uploaderId, "userHeader");
+        }
+        catch (Exception e) {
+
+        }
     }
 
     public void clearValues(ActionEvent actionEvent) {

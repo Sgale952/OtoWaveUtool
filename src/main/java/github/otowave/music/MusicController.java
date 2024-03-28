@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import static github.otowave.data.DataHandler.getGenres;
+import static github.otowave.data.ImageDataHandler.applyImage;
 import static github.otowave.data.ImageDataHandler.uploadImage;
 import static github.otowave.data.MusicDataHandler.uploadMusic;
 import static github.otowave.music.MusicManager.getToggledGenre;
@@ -72,8 +73,14 @@ public class MusicController implements Initializable {
             imageFilePath = getSetting("defaultDir") + imageFilePath;
         }
 
-        lastMusicId = uploadMusic(authorId, title, eContent, genre, audioFilePath);
-        lastImageId = uploadImage(authorId, "musicCover", imageFilePath);
+        try {
+            lastMusicId = uploadMusic(authorId, title, eContent, genre, audioFilePath);
+            lastImageId = uploadImage(authorId, imageFilePath);
+            applyImage(authorId, lastImageId, lastMusicId, "musicCover");
+        }
+        catch (Exception e) {
+
+        }
     }
 
     public void deleteLastUploaded(ActionEvent actionEvent) {

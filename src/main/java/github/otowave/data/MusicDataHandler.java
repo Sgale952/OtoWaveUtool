@@ -8,7 +8,7 @@ import java.io.IOException;
 import static github.otowave.data.DataHandler.client;
 
 public class MusicDataHandler {
-    public static String uploadMusic(String authorId, String title, String eContent, String genre, String filePath) {
+    public static String uploadMusic(String authorId, String title, String eContent, String genre, String filePath) throws IOException {
         String musicId = "";
         File audioFile = new File(filePath);
         String fileExtension = DataHandler.getFileExtension(filePath);
@@ -22,18 +22,15 @@ public class MusicDataHandler {
                 .build();
 
         Request request = new Request.Builder()
-                .url(DataHandler.baseUrl+authorId+"/new-song")
+                .url(DataHandler.BASE_URL +authorId+"/new-song")
                 .post(requestBody)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()) {
+            if (response.isSuccessful()) {
                 musicId = response.body().string();
                 //TODO: update status
             }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
         }
 
         return musicId;

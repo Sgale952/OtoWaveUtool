@@ -20,22 +20,27 @@ public class SearchController {
         StringBuilder musicIds = new StringBuilder();
         StringBuilder albumIds = new StringBuilder();
         String delimiter = ", ";
-        HashMap<String, Integer> resultIds = searchIds(tfSearchPhrase.getText());
+        try {
+            HashMap<String, Integer> resultIds = searchIds(tfSearchPhrase.getText());
 
-        for(HashMap.Entry<String, Integer> entry: resultIds.entrySet()) {
-            String table = entry.getKey();
+            for(HashMap.Entry<String, Integer> entry: resultIds.entrySet()) {
+                String table = entry.getKey();
 
-            switch (table) {
-                case "users":
-                    userIds.append(entry.getValue()).append(delimiter);
-                case "music":
-                    musicIds.append(entry.getValue()).append(delimiter);
-                case "albums":
-                    albumIds.append(entry.getValue()).append(delimiter);
+                switch (table) {
+                    case "users":
+                        userIds.append(entry.getValue()).append(delimiter);
+                    case "music":
+                        musicIds.append(entry.getValue()).append(delimiter);
+                    case "albums":
+                        albumIds.append(entry.getValue()).append(delimiter);
+                }
             }
+            tfAuthorIds.setText(userIds.toString());
+            tfMusicIds.setText(musicIds.toString());
+            tfAlbumIds.setText(albumIds.toString());
         }
-        tfAuthorIds.setText(userIds.toString());
-        tfMusicIds.setText(musicIds.toString());
-        tfAlbumIds.setText(albumIds.toString());
+        catch (Exception e) {
+
+        }
     }
 }

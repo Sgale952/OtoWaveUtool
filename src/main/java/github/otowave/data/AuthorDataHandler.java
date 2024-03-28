@@ -6,11 +6,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static github.otowave.data.DataHandler.baseUrl;
+import static github.otowave.data.DataHandler.BASE_URL;
 import static github.otowave.data.DataHandler.client;
 
 public class AuthorDataHandler {
-    public static String uploadUser(String nickname, String email, String password) {
+    public static String uploadUser(String nickname, String email, String password) throws Exception {
         String userId = "";
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("access", 2);
@@ -22,7 +22,7 @@ public class AuthorDataHandler {
         RequestBody requestBody = RequestBody.create(jsonObject.toString(), mediaType);
 
         Request request = new Request.Builder()
-                .url(baseUrl+"new-user")
+                .url(BASE_URL +"new-user")
                 .post(requestBody)
                 .build();
 
@@ -31,9 +31,6 @@ public class AuthorDataHandler {
                 userId = response.body().string();
                 //TODO: update status
             }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
         }
 
         return userId;

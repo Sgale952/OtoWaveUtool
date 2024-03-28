@@ -12,22 +12,21 @@ import org.jaudiotagger.tag.TagException;
 import java.io.File;
 import java.io.IOException;
 
+import static github.otowave.data.AlbumDataHandler.fillPlaylist;
+import static github.otowave.data.ImageDataHandler.applyImage;
 import static github.otowave.data.MusicDataHandler.uploadMusic;
 
 public class AlbumManager {
-    static String uploadMusicByMetadata(String authorId, String path) {
+    static String uploadMusicInAlbum( String imageId, String albumId, String authorId, String path) throws Exception {
         File dir = new File(path);
         File[] files = dir.listFiles();
 
-        try {
-            for (File file : files) {
-                AudioFile audio = AudioFileIO.read(file.getAbsoluteFile());
-                Tag tag = audio.getTagOrCreateDefault();
-                uploadMusic(authorId, tag.getFirst(FieldKey.TITLE), tag.getFirst(FieldKey.CUSTOM1), tag.getFirst(FieldKey.GENRE), file.getAbsoluteFile().toString());
-            }
-        }
-        catch (CannotReadException | TagException | InvalidAudioFrameException | ReadOnlyFileException | IOException e) {
-            e.printStackTrace();
+        for (File file : files) {
+            AudioFile audio = AudioFileIO.read(file.getAbsoluteFile());
+            Tag tag = audio.getTagOrCreateDefault();
+            String lastMusicId = uploadMusic(authorId, tag.getFirst(FieldKey.TITLE), tag.getFirst(FieldKey.CUSTOM1), tag.getFirst(FieldKey.GENRE), file.getAbsoluteFile().toString());
+            applyImage(authorId, imageId, lastMusicId, "musicCover");
+            fillPlaylist(albumId, lastMusicId);
         }
 
         return "";

@@ -11,31 +11,28 @@ import java.util.HashMap;
 public class DataHandler {
     static final OkHttpClient client = new OkHttpClient();
     static final Gson gson = new Gson();
-    static final String baseUrl = "http://0.0.0.0:4567/";
+    static final String BASE_URL = "http://0.0.0.0:4567/";
 
     public static void uploadAuthor() {
     }
 
     public static int uploadMusic() {
         Request request = new Request.Builder()
-                .url(baseUrl + "navigator/genres")
+                .url(BASE_URL + "navigator/genres")
                 .build();
 
         return 0;
     }
 
-    public static HashMap<String, Integer> searchIds(String phrase) {
+    public static HashMap<String, Integer> searchIds(String phrase) throws IOException {
         HashMap<String, Integer> data = new HashMap<>();
         Request request = new Request.Builder()
-                .url(baseUrl + "search?phrase=" + phrase)
+                .url(BASE_URL + "search?phrase=" + phrase)
                 .build();
 
         try(Response response = client.newCall(request).execute()) {
             String json = response.body().string();
             data = gson.fromJson(json, HashMap.class);
-        }
-        catch(IOException e) {
-            e.printStackTrace();
         }
 
         return data;
@@ -44,14 +41,14 @@ public class DataHandler {
     public static HashMap<Integer, String> getGenres() {
         HashMap<Integer, String> data = new HashMap<>();
         Request request = new Request.Builder()
-                .url(baseUrl + "navigator/genres")
+                .url(BASE_URL + "navigator/genres")
                 .build();
 
         try(Response response = client.newCall(request).execute()) {
             String json = response.body().string();
             data = gson.fromJson(json, HashMap.class);
         }
-        catch(IOException e) {
+        catch (IOException e) {
             e.printStackTrace();
         }
 
