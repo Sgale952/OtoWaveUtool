@@ -3,13 +3,12 @@ package github.otowave.data;
 import okhttp3.*;
 
 import java.io.File;
-import java.io.IOException;
 
 import static github.otowave.data.DataHandler.client;
 
 public class MusicDataHandler {
-    public static String uploadMusic(String authorId, String title, String eContent, String genre, String filePath) throws IOException {
-        String musicId = "";
+    public static String uploadMusic(String authorId, String title, String eContent, String genre, String filePath) throws Exception {
+        String musicId;
         File audioFile = new File(filePath);
         String fileExtension = DataHandler.getFileExtension(filePath);
         RequestBody requestBody = new MultipartBody.Builder()
@@ -27,10 +26,11 @@ public class MusicDataHandler {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                musicId = response.body().string();
-                //TODO: update status
+            if (!response.isSuccessful()) {
+                throw new Exception("error upload music");
             }
+
+            musicId = response.body().string();
         }
 
         return musicId;

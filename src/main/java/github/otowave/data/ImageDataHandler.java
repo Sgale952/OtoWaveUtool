@@ -4,13 +4,12 @@ import com.google.gson.JsonObject;
 import okhttp3.*;
 
 import java.io.File;
-import java.io.IOException;
 
 import static github.otowave.data.DataHandler.BASE_URL;
 import static github.otowave.data.DataHandler.client;
 
 public class ImageDataHandler {
-    public static String uploadImage(String uploaderId, String filePath) throws IOException {
+    public static String uploadImage(String uploaderId, String filePath) throws Exception {
         String imageId = "";
         File imageFile = new File(filePath);
         String fileExtension = DataHandler.getFileExtension(filePath);
@@ -27,10 +26,11 @@ public class ImageDataHandler {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                imageId = response.body().string();
-                //TODO: update status
+            if (!response.isSuccessful()) {
+                throw new Exception("error upload image");
             }
+
+            imageId = response.body().string();
         }
 
         return imageId;
@@ -51,8 +51,8 @@ public class ImageDataHandler {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                //TODO: update status
+            if (!response.isSuccessful()) {
+                throw new Exception("error apply image");
             }
         }
     }

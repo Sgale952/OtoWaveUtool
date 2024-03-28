@@ -40,7 +40,7 @@ public class SearchController {
             tfAlbumIds.setText(albumIds.toString());
         }
         catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 }

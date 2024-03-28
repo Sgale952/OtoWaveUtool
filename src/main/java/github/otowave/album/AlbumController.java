@@ -14,8 +14,7 @@ import static github.otowave.album.AlbumManager.uploadMusicInAlbum;
 import static github.otowave.data.AlbumDataHandler.uploadAlbum;
 import static github.otowave.data.ImageDataHandler.applyImage;
 import static github.otowave.data.ImageDataHandler.uploadImage;
-import static github.otowave.otowaveutool.CommonUtils.setThemeSticker;
-import static github.otowave.settings.SettingsManager.getSetting;
+import static github.otowave.otowaveutool.StatusUpdater.*;
 
 public class AlbumController implements Initializable {
     @FXML
@@ -29,7 +28,7 @@ public class AlbumController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setThemeSticker(getSetting("theme"), ivSticker);
+        setWaitStatus(ttStatus, ivSticker);
     }
 
     public void upload(ActionEvent actionEvent) {
@@ -45,8 +44,10 @@ public class AlbumController implements Initializable {
             applyImage(authorId, lastImageId, lastAlbumId, "playlistCover");
         }
         catch (Exception e) {
-
+            setErrorStatus(e.getMessage(), ttStatus, ivSticker);
         }
+
+        setSuccessStatus(lastAlbumId, ttStatus, ivSticker);
     }
 
     public void deleteLastUploaded(ActionEvent actionEvent) {

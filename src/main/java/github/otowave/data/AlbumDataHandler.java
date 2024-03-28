@@ -10,7 +10,7 @@ import static github.otowave.data.DataHandler.*;
 
 public class AlbumDataHandler {
     public static String uploadAlbum(String authorId, String title) throws Exception {
-        String albumId = "";
+        String albumId;
         AlbumData albumData = new AlbumData(1, 1, title);
         String json = gson.toJson(albumData);
 
@@ -22,10 +22,11 @@ public class AlbumDataHandler {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                albumId = response.body().string();
-                //TODO: update status
+            if (!response.isSuccessful()) {
+                throw new Exception("error upload album");
             }
+
+            albumId = response.body().string();
         }
 
         return albumId;
@@ -44,8 +45,8 @@ public class AlbumDataHandler {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                //TODO: update status
+            if (!response.isSuccessful()) {
+                throw new Exception("error fill playlist");
             }
         }
     }

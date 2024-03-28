@@ -28,15 +28,16 @@ import static github.otowave.data.ImageDataHandler.uploadImage;
 import static github.otowave.data.MusicDataHandler.uploadMusic;
 import static github.otowave.music.MusicManager.getToggledGenre;
 import static github.otowave.otowaveutool.CommonUtils.*;
+import static github.otowave.otowaveutool.StatusUpdater.*;
 import static github.otowave.settings.SettingsManager.getSetting;
 
 public class MusicController implements Initializable {
     @FXML
     private ImageView ivSticker;
     @FXML
-    private MenuButton btnGenreMenu;
-    @FXML
     private Text ttStatus;
+    @FXML
+    private MenuButton btnGenreMenu;
     @FXML
     private TextField tfTitle, tfAuthor, tfMusicPath, tfCoverPath;
     @FXML
@@ -48,39 +49,45 @@ public class MusicController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        HashMap<Integer, String> genresMap = getGenres();
-        for (HashMap.Entry<Integer, String> entry : genresMap.entrySet()) {
-            RadioMenuItem radioMenuItem = new RadioMenuItem(entry.getValue());
-            radioMenuItem.setToggleGroup(genreToggleGroup);
-            btnGenreMenu.getItems().add(radioMenuItem);
-        }
-
         isUseDefaultDir = Boolean.parseBoolean(getSetting("useDefaultDir"));
+        setWaitStatus(ttStatus, ivSticker);
 
-        setThemeSticker(getSetting("theme"), ivSticker);
+        try {
+            HashMap<Integer, String> genresMap = getGenres();
+            for (HashMap.Entry<Integer, String> entry : genresMap.entrySet()) {
+                RadioMenuItem radioMenuItem = new RadioMenuItem(entry.getValue());
+                radioMenuItem.setToggleGroup(genreToggleGroup);
+                btnGenreMenu.getItems().add(radioMenuItem);
+            }
+        }
+        catch (Exception e) {
+            setErrorStatus("DB not connected", ttStatus, ivSticker);
+        }
     }
 
     public void upload(ActionEvent actionEvent) {
-        String authorId = tfAuthor.getText();
-        String title = tfTitle.getText();
-        String eContent = chbEcontent.isSelected()? "1" : "0";
-        String genre = getToggledGenre(genreToggleGroup);
-        String audioFilePath = tfMusicPath.getText();
-        String imageFilePath = tfCoverPath.getText();
-
-        if(isUseDefaultDir) {
-            audioFilePath = getSetting("defaultDir") + audioFilePath;
-            imageFilePath = getSetting("defaultDir") + imageFilePath;
-        }
-
         try {
+            String authorId = tfAuthor.getText();
+            String title = tfTitle.getText();
+            String eContent = chbEcontent.isSelected()? "1" : "0";
+            String genre = getToggledGenre(genreToggleGroup);
+            String audioFilePath = tfMusicPath.getText();
+            String imageFilePath = tfCoverPath.getText();
+
+            if(isUseDefaultDir) {
+                audioFilePath = getSetting("defaultDir") + audioFilePath;
+                imageFilePath = getSetting("defaultDir") + imageFilePath;
+            }
+
             lastMusicId = uploadMusic(authorId, title, eContent, genre, audioFilePath);
             lastImageId = uploadImage(authorId, imageFilePath);
             applyImage(authorId, lastImageId, lastMusicId, "musicCover");
         }
         catch (Exception e) {
-
+            setErrorStatus(e.getMessage(), ttStatus, ivSticker);
         }
+
+        setSuccessStatus(lastMusicId, ttStatus, ivSticker);
     }
 
     public void deleteLastUploaded(ActionEvent actionEvent) {
@@ -96,9 +103,9 @@ public class MusicController implements Initializable {
     }
 
     public void setMetadata(ActionEvent actionEvent) {
-        File audioFile = new File(getUploadPath(tfMusicPath.getText()));
-
         try {
+            File audioFile = new File(getUploadPath(tfMusicPath.getText()));
+
             AudioFile audio = AudioFileIO.read(audioFile);
 
             Tag tag = audio.getTagOrCreateDefault();
@@ -108,8 +115,10 @@ public class MusicController implements Initializable {
             tag.setField(FieldKey.CUSTOM1, String.valueOf(convertBooleanToInt(chbEcontent.isSelected())));
             audio.commit();
         }
-        catch (CannotReadException | TagException | InvalidAudioFrameException | ReadOnlyFileException | IOException | CannotWriteException e) {
-            e.printStackTrace();
+        catch (Exception e) {
+            setErrorStatus(e.getMessage(), ttStatus, ivSticker);
         }
+
+        setSuccessStatus("", ttStatus, ivSticker);
     }
 }

@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 import static github.otowave.data.AuthorDataHandler.uploadUser;
 import static github.otowave.data.ImageDataHandler.applyImage;
 import static github.otowave.data.ImageDataHandler.uploadImage;
-import static github.otowave.otowaveutool.CommonUtils.setThemeSticker;
+import static github.otowave.otowaveutool.StatusUpdater.*;
 import static github.otowave.settings.SettingsManager.getSetting;
 
 public class AuthorController implements Initializable {
@@ -24,13 +24,14 @@ public class AuthorController implements Initializable {
     @FXML
     private TextField tfNickname, tfEmail, tfAvatarPath, tfHeaderPath, tfPassword;
     private Boolean isUseDefaultDir;
+    private String uploaderId;
     private String avatarId;
     private String headerId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         isUseDefaultDir = Boolean.parseBoolean(getSetting("useDefaultDir"));
-        setThemeSticker(getSetting("theme"), ivSticker);
+        setWaitStatus(ttStatus, ivSticker);
     }
 
     public void upload(ActionEvent actionEvent) {
@@ -45,7 +46,7 @@ public class AuthorController implements Initializable {
         }
 
         try {
-            String uploaderId = uploadUser(nickname, email, password);
+            uploaderId = uploadUser(nickname, email, password);
 
             avatarId = uploadImage(uploaderId, avatarFile);
             applyImage(uploaderId, avatarId, uploaderId, "userAvatar");
@@ -54,8 +55,10 @@ public class AuthorController implements Initializable {
             applyImage(uploaderId, headerId, uploaderId, "userHeader");
         }
         catch (Exception e) {
-
+            setErrorStatus(e.getMessage(), ttStatus, ivSticker);
         }
+
+        setSuccessStatus(uploaderId, ttStatus, ivSticker);
     }
 
     public void clearValues(ActionEvent actionEvent) {

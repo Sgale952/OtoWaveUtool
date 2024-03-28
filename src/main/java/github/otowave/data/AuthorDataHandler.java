@@ -11,7 +11,7 @@ import static github.otowave.data.DataHandler.client;
 
 public class AuthorDataHandler {
     public static String uploadUser(String nickname, String email, String password) throws Exception {
-        String userId = "";
+        String userId;
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("access", 2);
         jsonObject.addProperty("nickname", nickname);
@@ -27,10 +27,11 @@ public class AuthorDataHandler {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                userId = response.body().string();
-                //TODO: update status
+            if (!response.isSuccessful()) {
+                throw new Exception("error upload user");
             }
+
+            userId = response.body().string();
         }
 
         return userId;

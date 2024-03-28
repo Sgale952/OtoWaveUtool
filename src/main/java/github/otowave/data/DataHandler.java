@@ -13,24 +13,17 @@ public class DataHandler {
     static final Gson gson = new Gson();
     static final String BASE_URL = "http://0.0.0.0:4567/";
 
-    public static void uploadAuthor() {
-    }
-
-    public static int uploadMusic() {
-        Request request = new Request.Builder()
-                .url(BASE_URL + "navigator/genres")
-                .build();
-
-        return 0;
-    }
-
-    public static HashMap<String, Integer> searchIds(String phrase) throws IOException {
-        HashMap<String, Integer> data = new HashMap<>();
+    public static HashMap<String, Integer> searchIds(String phrase) throws Exception {
+        HashMap<String, Integer> data;
         Request request = new Request.Builder()
                 .url(BASE_URL + "search?phrase=" + phrase)
                 .build();
 
         try(Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new Exception("error search id");
+            }
+
             String json = response.body().string();
             data = gson.fromJson(json, HashMap.class);
         }
@@ -38,18 +31,18 @@ public class DataHandler {
         return data;
     }
 
-    public static HashMap<Integer, String> getGenres() {
+    public static HashMap<Integer, String> getGenres() throws Exception {
         HashMap<Integer, String> data = new HashMap<>();
         Request request = new Request.Builder()
                 .url(BASE_URL + "navigator/genres")
                 .build();
 
         try(Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new Exception("error get genres");
+            }
             String json = response.body().string();
             data = gson.fromJson(json, HashMap.class);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
         }
 
         return data;
