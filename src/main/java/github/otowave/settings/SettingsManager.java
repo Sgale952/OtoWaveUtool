@@ -50,7 +50,9 @@ public class SettingsManager {
     }
 
     public static void setSetting(String key, String value) {
-        properties.setProperty(key, value);
+        if (value != null) {
+            properties.setProperty(key, value);
+        }
     }
 }
 
