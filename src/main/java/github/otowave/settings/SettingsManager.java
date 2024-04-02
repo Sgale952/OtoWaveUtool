@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class SettingsManager {
 
-    private static final String SETTINGS_FILE = "Utool.properties";
+    private static final String SETTINGS_FILE = "uTool.properties";
     private static final Properties properties = new Properties();
 
     public static void loadSettingsFile() {

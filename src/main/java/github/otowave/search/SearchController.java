@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static github.otowave.data.DataHandler.searchIds;
+import static github.otowave.search.SearchHandler.formatArrayList;
 
 public class SearchController {
     @FXML
@@ -16,31 +18,17 @@ public class SearchController {
     private TextField tfSearchPhrase, tfAuthorIds, tfMusicIds, tfAlbumIds;
 
     public void search(ActionEvent actionEvent) {
-        StringBuilder userIds = new StringBuilder();
-        StringBuilder musicIds = new StringBuilder();
-        StringBuilder albumIds = new StringBuilder();
-        String delimiter = ", ";
         try {
-            HashMap<String, Integer> resultIds = searchIds(tfSearchPhrase.getText());
+            HashMap<String, ArrayList<Integer>> resultIds = searchIds(tfSearchPhrase.getText());
 
-            for(HashMap.Entry<String, Integer> entry: resultIds.entrySet()) {
-                String table = entry.getKey();
+            tfAuthorIds.setText(formatArrayList(resultIds.get("users")));
+            tfMusicIds.setText(formatArrayList(resultIds.get("music")));
+            tfAlbumIds.setText(formatArrayList(resultIds.get("playlists")));
 
-                switch (table) {
-                    case "users":
-                        userIds.append(entry.getValue()).append(delimiter);
-                    case "music":
-                        musicIds.append(entry.getValue()).append(delimiter);
-                    case "albums":
-                        albumIds.append(entry.getValue()).append(delimiter);
-                }
-            }
-            tfAuthorIds.setText(userIds.toString());
-            tfMusicIds.setText(musicIds.toString());
-            tfAlbumIds.setText(albumIds.toString());
+            ttStatus.setText("Success");
         }
         catch (Exception e) {
-            e.printStackTrace();
+            ttStatus.setText(e.getMessage());
         }
     }
 }

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -32,7 +33,8 @@ public class Main extends Application {
         updateSceneTheme();
 
         stage.setResizable(false);
-        stage.setTitle("OtoWave upload tool");
+        stage.setTitle("OtoWave uTool");
+        stage.getIcons().add(new Image("github/otowave/otowaveutool/logo.png"));
         stage.setScene(scene);
         stage.show();
     }

@@ -50,5 +50,7 @@ public class AlbumDataHandler {
             }
         }
     }
+
+    record AlbumData(int official, int access, String title) {}
 }
-record AlbumData(int official, int access, String title) {}
+

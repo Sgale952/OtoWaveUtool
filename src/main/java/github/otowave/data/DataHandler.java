@@ -1,11 +1,13 @@
 package github.otowave.data;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import okhttp3.*;
 
-import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DataHandler {
@@ -13,8 +15,8 @@ public class DataHandler {
     static final Gson gson = new Gson();
     static final String BASE_URL = "http://0.0.0.0:4567/";
 
-    public static HashMap<String, Integer> searchIds(String phrase) throws Exception {
-        HashMap<String, Integer> data;
+    public static HashMap<String, ArrayList<Integer>> searchIds(String phrase) throws Exception {
+        HashMap<String, ArrayList<Integer>> data;
         Request request = new Request.Builder()
                 .url(BASE_URL + "search?phrase=" + phrase)
                 .build();
@@ -25,7 +27,8 @@ public class DataHandler {
             }
 
             String json = response.body().string();
-            data = gson.fromJson(json, HashMap.class);
+            Type dataType = new TypeToken<HashMap<String, ArrayList<Integer>>>() {}.getType();
+            data = gson.fromJson(json, dataType);
         }
 
         return data;

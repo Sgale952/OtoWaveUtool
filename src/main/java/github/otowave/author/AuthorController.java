@@ -54,7 +54,6 @@ public class AuthorController implements Initializable {
         }
         catch (Exception e) {
             setErrorStatus(e.getMessage(), ttStatus, ivSticker);
-            System.out.println("error");
         }
     }
 
