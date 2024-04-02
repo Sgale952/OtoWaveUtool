@@ -9,15 +9,17 @@ import static github.otowave.data.DataHandler.BASE_URL;
 import static github.otowave.data.DataHandler.client;
 
 public class ImageDataHandler {
-    public static String uploadImage(String uploaderId, String filePath) throws Exception {
-        String imageId = "";
+    public static String uploadImage(String uploaderId, String sourceId, String imageType, String filePath) throws Exception {
+        String imageId;
         File imageFile = new File(filePath);
         String fileExtension = DataHandler.getFileExtension(filePath);
 
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("image", "image."+fileExtension,
-                        RequestBody.create(imageFile, MediaType.parse("image/"+fileExtension)))
+                .addFormDataPart("imageType", imageType)
+                .addFormDataPart("sourceId", sourceId)
+                .addFormDataPart("image", "image." + fileExtension,
+                        RequestBody.create(imageFile, MediaType.parse("image/" + fileExtension)))
                 .build();
 
         Request request = new Request.Builder()
@@ -46,13 +48,13 @@ public class ImageDataHandler {
         RequestBody requestBody = RequestBody.create(jsonObject.toString(), mediaType);
 
         Request request = new Request.Builder()
-                .url(BASE_URL + uploaderId + "/apply-image")
-                .patch(requestBody)
+                .url(DataHandler.BASE_URL + uploaderId + "/set-image")
+                .post(requestBody)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
-                throw new Exception("error apply image");
+                throw new Exception("error upload user");
             }
         }
     }

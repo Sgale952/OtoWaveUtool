@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 
 import static github.otowave.album.AlbumManager.uploadMusicInAlbum;
 import static github.otowave.data.AlbumDataHandler.uploadAlbum;
-import static github.otowave.data.ImageDataHandler.applyImage;
 import static github.otowave.data.ImageDataHandler.uploadImage;
 import static github.otowave.otowaveutool.StatusUpdater.*;
 
@@ -23,8 +22,8 @@ public class AlbumController implements Initializable {
     private Text ttStatus;
     @FXML
     private TextField tfTitle, tfAuthor, tfAlbumDir, tfCoverPath;
-    private String lastAlbumId;
-    private String lastImageId;
+    private String albumId;
+    private String imageId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -38,16 +37,15 @@ public class AlbumController implements Initializable {
         String coverPath = tfCoverPath.getText();
 
         try {
-            lastImageId = uploadImage(authorId, coverPath);
-            lastAlbumId = uploadAlbum(authorId, title);
-            uploadMusicInAlbum(lastImageId, lastAlbumId, authorId, albumDir);
-            applyImage(authorId, lastImageId, lastAlbumId, "playlistCover");
+            albumId = uploadAlbum(authorId, title);
+            imageId = uploadImage(authorId, albumId, "playlistCover", coverPath);
+            uploadMusicInAlbum(imageId, albumId, authorId, albumDir);
+
+            setSuccessStatus(albumId, ttStatus, ivSticker);
         }
         catch (Exception e) {
             setErrorStatus(e.getMessage(), ttStatus, ivSticker);
         }
-
-        setSuccessStatus(lastAlbumId, ttStatus, ivSticker);
     }
 
     public void deleteLastUploaded(ActionEvent actionEvent) {

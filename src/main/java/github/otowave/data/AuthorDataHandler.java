@@ -22,7 +22,7 @@ public class AuthorDataHandler {
         RequestBody requestBody = RequestBody.create(jsonObject.toString(), mediaType);
 
         Request request = new Request.Builder()
-                .url(BASE_URL +"new-user")
+                .url(BASE_URL + "new-user")
                 .post(requestBody)
                 .build();
 

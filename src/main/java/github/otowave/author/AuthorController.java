@@ -11,7 +11,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static github.otowave.data.AuthorDataHandler.uploadUser;
-import static github.otowave.data.ImageDataHandler.applyImage;
 import static github.otowave.data.ImageDataHandler.uploadImage;
 import static github.otowave.otowaveutool.StatusUpdater.*;
 import static github.otowave.settings.SettingsManager.getSetting;
@@ -40,6 +39,7 @@ public class AuthorController implements Initializable {
         String password = tfPassword.getText();
         String avatarFile = tfAvatarPath.getText();
         String headerFile = tfAvatarPath.getText();
+
         if(isUseDefaultDir) {
             avatarFile = getSetting("defaultDir") + avatarFile;
             headerFile = getSetting("defaultDir") + headerFile;
@@ -47,18 +47,15 @@ public class AuthorController implements Initializable {
 
         try {
             uploaderId = uploadUser(nickname, email, password);
+            avatarId = uploadImage(uploaderId, uploaderId, "userAvatar", avatarFile);
+            headerId = uploadImage(uploaderId, uploaderId, "userHeader", headerFile);
 
-            avatarId = uploadImage(uploaderId, avatarFile);
-            applyImage(uploaderId, avatarId, uploaderId, "userAvatar");
-
-            headerId = uploadImage(uploaderId, headerFile);
-            applyImage(uploaderId, headerId, uploaderId, "userHeader");
+            setSuccessStatus(uploaderId, ttStatus, ivSticker);
         }
         catch (Exception e) {
             setErrorStatus(e.getMessage(), ttStatus, ivSticker);
+            System.out.println("error");
         }
-
-        setSuccessStatus(uploaderId, ttStatus, ivSticker);
     }
 
     public void clearValues(ActionEvent actionEvent) {
@@ -69,6 +66,5 @@ public class AuthorController implements Initializable {
         tfPassword.setText("");
     }
 
-    public void deleteLastUploaded(ActionEvent actionEvent) {
-    }
+    public void deleteLastUploaded(ActionEvent actionEvent) {}
 }

@@ -8,22 +8,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.exceptions.CannotReadException;
-import org.jaudiotagger.audio.exceptions.CannotWriteException;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
-import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
-import org.jaudiotagger.tag.TagException;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import static github.otowave.data.DataHandler.getGenres;
-import static github.otowave.data.ImageDataHandler.applyImage;
 import static github.otowave.data.ImageDataHandler.uploadImage;
 import static github.otowave.data.MusicDataHandler.uploadMusic;
 import static github.otowave.music.MusicManager.getToggledGenre;
@@ -61,7 +54,7 @@ public class MusicController implements Initializable {
             }
         }
         catch (Exception e) {
-            setErrorStatus("DB not connected", ttStatus, ivSticker);
+            setErrorStatus(e.getMessage(), ttStatus, ivSticker);
         }
     }
 
@@ -80,19 +73,16 @@ public class MusicController implements Initializable {
             }
 
             lastMusicId = uploadMusic(authorId, title, eContent, genre, audioFilePath);
-            lastImageId = uploadImage(authorId, imageFilePath);
-            applyImage(authorId, lastImageId, lastMusicId, "musicCover");
+            lastImageId = uploadImage(authorId, lastMusicId, "musicCover", imageFilePath);
+
+            setSuccessStatus(lastMusicId, ttStatus, ivSticker);
         }
         catch (Exception e) {
             setErrorStatus(e.getMessage(), ttStatus, ivSticker);
         }
-
-        setSuccessStatus(lastMusicId, ttStatus, ivSticker);
     }
 
-    public void deleteLastUploaded(ActionEvent actionEvent) {
-
-    }
+    public void deleteLastUploaded(ActionEvent actionEvent) {}
 
     public void clearValues(ActionEvent actionEvent) {
         tfTitle.setText("");

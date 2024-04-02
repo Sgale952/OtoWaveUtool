@@ -32,7 +32,7 @@ public class DataHandler {
     }
 
     public static HashMap<Integer, String> getGenres() throws Exception {
-        HashMap<Integer, String> data = new HashMap<>();
+        HashMap<Integer, String> data;
         Request request = new Request.Builder()
                 .url(BASE_URL + "navigator/genres")
                 .build();
