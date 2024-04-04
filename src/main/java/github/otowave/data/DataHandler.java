@@ -9,11 +9,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class DataHandler {
-    static final OkHttpClient client = new OkHttpClient();
-    static final Gson gson = new Gson();
     static final String BASE_URL = "http://0.0.0.0:4567/";
+    static final Gson gson = new Gson();
+    static final OkHttpClient client = new OkHttpClient.Builder()
+            .readTimeout(0, TimeUnit.SECONDS)
+            .writeTimeout(0, TimeUnit.SECONDS)
+            .build();
 
     public static HashMap<String, ArrayList<Integer>> searchIds(String phrase) throws Exception {
         HashMap<String, ArrayList<Integer>> data;

@@ -1,9 +1,11 @@
 package github.otowave.data;
 
+import com.google.gson.JsonObject;
 import okhttp3.*;
 
 import java.io.File;
 
+import static github.otowave.data.DataHandler.BASE_URL;
 import static github.otowave.data.DataHandler.client;
 
 public class MusicDataHandler {
@@ -27,12 +29,31 @@ public class MusicDataHandler {
 
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
-                throw new Exception("error upload music");
+                throw new Exception("Error upload music");
             }
 
             musicId = response.body().string();
         }
 
         return musicId;
+    }
+
+    public static void deleteMusic(String musicId, String userId) throws Exception {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("musicId", musicId);
+
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody requestBody = RequestBody.create(jsonObject.toString(), mediaType);
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + userId + "/" + musicId + "/delete-song")
+                .delete(requestBody)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new Exception("Error delete music");
+            }
+        }
     }
 }

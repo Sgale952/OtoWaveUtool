@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 
 import static github.otowave.data.DataHandler.getGenres;
 import static github.otowave.data.ImageDataHandler.uploadImage;
+import static github.otowave.data.MusicDataHandler.deleteMusic;
 import static github.otowave.data.MusicDataHandler.uploadMusic;
 import static github.otowave.music.MusicManager.getToggledGenre;
 import static github.otowave.otowaveutool.CommonUtils.*;
@@ -30,14 +31,18 @@ public class MusicController implements Initializable {
     @FXML
     private Text ttStatus;
     @FXML
+    private Tooltip ttipDeleteLast;
+    @FXML
     private MenuButton btnGenreMenu;
     @FXML
     private TextField tfTitle, tfAuthor, tfMusicPath, tfCoverPath;
     @FXML
     private CheckBox chbEcontent;
+
     private final ToggleGroup genreToggleGroup = new ToggleGroup();
     private Boolean isUseDefaultDir;
     private String lastMusicId;
+    private String lastUserId;
     private String lastImageId;
 
     @Override
@@ -60,7 +65,7 @@ public class MusicController implements Initializable {
 
     public void upload(ActionEvent actionEvent) {
         try {
-            String authorId = tfAuthor.getText();
+            lastUserId = tfAuthor.getText();
             String title = tfTitle.getText();
             String eContent = chbEcontent.isSelected()? "1" : "0";
             String genre = getToggledGenre(genreToggleGroup);
@@ -72,9 +77,10 @@ public class MusicController implements Initializable {
                 imageFilePath = getSetting("defaultDir") + imageFilePath;
             }
 
-            lastMusicId = uploadMusic(authorId, title, eContent, genre, audioFilePath);
-            lastImageId = uploadImage(authorId, lastMusicId, "musicCover", imageFilePath);
+            lastMusicId = uploadMusic(lastUserId, title, eContent, genre, audioFilePath);
+            lastImageId = uploadImage(lastUserId, lastMusicId, "musicCover", imageFilePath);
 
+            ttipDeleteLast.setText("MusicID = "+lastMusicId+"\nUserID = "+lastUserId+"\nImageID = "+lastImageId);
             setSuccessStatus(lastMusicId, ttStatus, ivSticker);
         }
         catch (Exception e) {
@@ -82,7 +88,15 @@ public class MusicController implements Initializable {
         }
     }
 
-    public void deleteLastUploaded(ActionEvent actionEvent) {}
+    public void deleteLastUploaded(ActionEvent actionEvent) {
+        try {
+            deleteMusic(lastMusicId, lastUserId);
+            setSuccessStatus(lastMusicId, ttStatus, ivSticker);
+        }
+        catch (Exception e) {
+            setErrorStatus(e.getMessage(), ttStatus, ivSticker);
+        }
+    }
 
     public void clearValues(ActionEvent actionEvent) {
         tfTitle.setText("");
