@@ -63,7 +63,7 @@
          <Font size="14.0" />
       </font>
       <tooltip>
-         <Tooltip fx:id="ttipDeleteLast" text="Empty Tooltip" />
+         <Tooltip fx:id="ttipDeleteLast" text="Здесь появятся значения последних id, после загрузки музыки" />
       </tooltip>
    </Button>
    <Button layoutX="252.0" layoutY="23.0" mnemonicParsing="false" onAction="#setMetadata" prefHeight="20.0" prefWidth="101.0" text="set metadata">

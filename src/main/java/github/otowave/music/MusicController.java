@@ -41,9 +41,9 @@ public class MusicController implements Initializable {
 
     private final ToggleGroup genreToggleGroup = new ToggleGroup();
     private Boolean isUseDefaultDir;
-    private String lastMusicId;
-    private String lastUserId;
-    private String lastImageId;
+    private String musicId;
+    private String userId;
+    private String imageId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -65,7 +65,7 @@ public class MusicController implements Initializable {
 
     public void upload(ActionEvent actionEvent) {
         try {
-            lastUserId = tfAuthor.getText();
+            userId = tfAuthor.getText();
             String title = tfTitle.getText();
             String eContent = chbEcontent.isSelected()? "1" : "0";
             String genre = getToggledGenre(genreToggleGroup);
@@ -77,11 +77,11 @@ public class MusicController implements Initializable {
                 imageFilePath = getSetting("defaultDir") + imageFilePath;
             }
 
-            lastMusicId = uploadMusic(lastUserId, title, eContent, genre, audioFilePath);
-            lastImageId = uploadImage(lastUserId, lastMusicId, "musicCover", imageFilePath);
+            musicId = uploadMusic(userId, title, eContent, genre, audioFilePath);
+            imageId = uploadImage(userId, musicId, "musicCover", imageFilePath);
 
-            ttipDeleteLast.setText("MusicID = "+lastMusicId+"\nUserID = "+lastUserId+"\nImageID = "+lastImageId);
-            setSuccessStatus(lastMusicId, ttStatus, ivSticker);
+            ttipDeleteLast.setText("MusicID = "+ musicId +"\nUserID = "+ userId +"\nImageID = "+ imageId);
+            setSuccessStatus(musicId, ttStatus, ivSticker);
         }
         catch (Exception e) {
             setErrorStatus(e.getMessage(), ttStatus, ivSticker);
@@ -90,8 +90,8 @@ public class MusicController implements Initializable {
 
     public void deleteLastUploaded(ActionEvent actionEvent) {
         try {
-            deleteMusic(lastMusicId, lastUserId);
-            setSuccessStatus(lastMusicId, ttStatus, ivSticker);
+            deleteMusic(musicId, userId);
+            setSuccessStatus(musicId, ttStatus, ivSticker);
         }
         catch (Exception e) {
             setErrorStatus(e.getMessage(), ttStatus, ivSticker);

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
@@ -11,8 +12,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static github.otowave.album.AlbumManager.uploadMusicInAlbum;
+import static github.otowave.data.AlbumDataHandler.deleteAlbum;
 import static github.otowave.data.AlbumDataHandler.uploadAlbum;
 import static github.otowave.data.ImageDataHandler.uploadImage;
+import static github.otowave.data.MusicDataHandler.deleteMusic;
 import static github.otowave.otowaveutool.StatusUpdater.*;
 
 public class AlbumController implements Initializable {
@@ -20,6 +23,8 @@ public class AlbumController implements Initializable {
     private ImageView ivSticker;
     @FXML
     private Text ttStatus;
+    @FXML
+    private Tooltip ttipDeleteLast;
     @FXML
     private TextField tfTitle, tfAuthor, tfAlbumDir, tfCoverPath;
     private String albumId;
@@ -41,6 +46,7 @@ public class AlbumController implements Initializable {
             imageId = uploadImage(authorId, albumId, "playlistCover", coverPath);
             uploadMusicInAlbum(imageId, albumId, authorId, albumDir);
 
+            ttipDeleteLast.setText("AlbumID = "+albumId+"\nImageID = "+imageId);
             setSuccessStatus(albumId, ttStatus, ivSticker);
         }
         catch (Exception e) {
@@ -49,6 +55,13 @@ public class AlbumController implements Initializable {
     }
 
     public void deleteLastUploaded(ActionEvent actionEvent) {
+        try {
+            deleteAlbum(albumId);
+            setSuccessStatus(albumId, ttStatus, ivSticker);
+        }
+        catch (Exception e) {
+            setErrorStatus(e.getMessage(), ttStatus, ivSticker);
+        }
     }
 
     public void clearValues(ActionEvent actionEvent) {

@@ -51,6 +51,25 @@ public class AlbumDataHandler {
         }
     }
 
+    public static void deleteAlbum(String albumId) throws Exception {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("albumId", albumId);
+
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody requestBody = RequestBody.create(jsonObject.toString(), mediaType);
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + albumId + "/delete-playlist")
+                .delete(requestBody)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new Exception("Error delete album");
+            }
+        }
+    }
+
     record AlbumData(int official, int access, String title) {}
 }
 
