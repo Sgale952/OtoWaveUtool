@@ -31,20 +31,29 @@
          <Font size="14.0" />
       </font>
    </MenuButton>
-   <TextField fx:id="tfAuthor" layoutX="35.0" layoutY="123.0" prefHeight="39.0" prefWidth="164.0" promptText="author id">
+   <TextField fx:id="tfAuthor" layoutX="35.0" layoutY="123.0" prefHeight="39.0" prefWidth="164.0" promptText="authorID">
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip fx:id="ttipAuthor" text="Автор, содержащийся в базе данных" />
+      </tooltip>
    </TextField>
    <TextField fx:id="tfMusicPath" layoutX="220.0" layoutY="65.0" prefHeight="39.0" prefWidth="164.0" promptText="music file">
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip fx:id="ttipMusicFile" text="Путь до музыки (или только название, если используется default dir) с расширением файла" />
+      </tooltip>
    </TextField>
    <TextField fx:id="tfCoverPath" layoutX="219.0" layoutY="123.0" prefHeight="39.0" prefWidth="164.0" promptText="cover file">
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip fx:id="ttipCoverFile" text="Путь до картинки (или только название, если используется default dir) с расширением файла" />
+      </tooltip>
    </TextField>
    <CheckBox fx:id="chbEcontent" layoutX="220.0" layoutY="180.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="121.0" text="explicit content">
       <font>
@@ -71,7 +80,15 @@
          <Font size="14.0" />
       </font>
       <tooltip>
-         <Tooltip text="Устанавливает метаданные музыки для создания плейлиста" />
+         <Tooltip fx:id="ttipSetMetadata" text="Устанавливает метаданные музыки для создания альбома во вкладке Album.&#10;Задаёт title, authorID, genre, explicit content для указанного аудио файла" />
       </tooltip>
    </Button>
+   <TextField fx:id="tfAlbum" layoutX="400.0" layoutY="65.0" prefHeight="39.0" prefWidth="164.0" promptText="albumID">
+      <font>
+         <Font size="14.0" />
+      </font>
+      <tooltip>
+         <Tooltip fx:id="ttipAlbum" text="Альбом, содержащийся в базе данных. Если музыка не включена в альбом, оставить пустым" />
+      </tooltip>
+   </TextField>
 </AnchorPane>

@@ -4,14 +4,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static github.otowave.data.AuthorDataHandler.uploadUser;
 import static github.otowave.data.ImageDataHandler.uploadImage;
+import static github.otowave.otowaveutool.CommonUtils.disableTooltips;
 import static github.otowave.otowaveutool.StatusUpdater.*;
 import static github.otowave.settings.SettingsManager.getSetting;
 
@@ -21,8 +24,11 @@ public class AuthorController implements Initializable {
     @FXML
     private ImageView ivSticker;
     @FXML
+    private Tooltip ttipEmail, ttipAvatarFile, ttipHeaderFile;
+    @FXML
     private TextField tfNickname, tfEmail, tfAvatarPath, tfHeaderPath, tfPassword;
-    private Boolean isUseDefaultDir;
+    private boolean isUseDefaultDir;
+    private boolean isUseTooltips;
     private String uploaderId;
     private String avatarId;
     private String headerId;
@@ -30,6 +36,14 @@ public class AuthorController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         isUseDefaultDir = Boolean.parseBoolean(getSetting("useDefaultDir"));
+        isUseTooltips = Boolean.parseBoolean(getSetting("enableTooltips"));
+        if(!isUseTooltips) {
+            ArrayList<Tooltip> tooltips = new ArrayList<>(){{
+                add(ttipEmail); add(ttipAvatarFile); add(ttipHeaderFile);
+            }};
+            disableTooltips(tooltips);
+        }
+
         setWaitStatus(ttStatus, ivSticker);
     }
 

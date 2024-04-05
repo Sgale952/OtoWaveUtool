@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -24,19 +25,28 @@
       </font>
    </TextField>
    <Separator layoutX="28.0" layoutY="78.0" prefHeight="24.0" prefWidth="546.0" />
-   <TextField fx:id="tfAuthorIds" editable="false" layoutX="158.0" layoutY="102.0" prefHeight="32.0" prefWidth="287.0" promptText="author ids">
+   <TextField fx:id="tfAuthorIds" editable="false" layoutX="158.0" layoutY="102.0" prefHeight="32.0" prefWidth="287.0" promptText="authorIDs">
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip text="authorIDs" />
+      </tooltip>
    </TextField>
-   <TextField fx:id="tfMusicIds" editable="false" layoutX="158.0" layoutY="144.0" prefHeight="32.0" prefWidth="287.0" promptText="music ids">
+   <TextField fx:id="tfMusicIds" editable="false" layoutX="158.0" layoutY="144.0" prefHeight="32.0" prefWidth="287.0" promptText="musicIDs">
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip text="musicIDs" />
+      </tooltip>
    </TextField>
-   <TextField fx:id="tfAlbumIds" editable="false" layoutX="158.0" layoutY="185.0" prefHeight="32.0" prefWidth="287.0" promptText="album ids">
+   <TextField fx:id="tfAlbumIds" editable="false" layoutX="158.0" layoutY="185.0" prefHeight="32.0" prefWidth="287.0" promptText="albumIDs">
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip text="albumIDs" />
+      </tooltip>
    </TextField>
 </AnchorPane>

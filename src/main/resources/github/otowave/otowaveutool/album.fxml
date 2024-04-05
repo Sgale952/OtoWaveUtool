@@ -24,15 +24,21 @@
          <Font size="14.0" />
       </font>
    </TextField>
-   <TextField fx:id="tfAuthor" layoutX="35.0" layoutY="123.0" prefHeight="39.0" prefWidth="164.0" promptText="author (should be exist)">
+   <TextField fx:id="tfAuthor" layoutX="35.0" layoutY="123.0" prefHeight="39.0" prefWidth="164.0" promptText="authorID">
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip fx:id="ttipAuthor" text="Автор, содержащийся в базе данных" />
+      </tooltip>
    </TextField>
    <TextField fx:id="tfAlbumDir" layoutX="220.0" layoutY="65.0" prefHeight="39.0" prefWidth="164.0" promptText="album directory">
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip fx:id="ttipAlbumDir" text="Путь до папки альбома.&#10;Содержащаяся в папке музыка будет автоматически загружена на сервер и добавлена в плейлист (музыку следует подготовить с помощью set metadata во вкладке music).&#10;Может быть пустой" />
+      </tooltip>
    </TextField>
    <ImageView fx:id="ivSticker" fitHeight="150.0" fitWidth="172.0" layoutX="425.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
    </ImageView>
@@ -53,5 +59,8 @@
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip fx:id="ttipCover" text="Путь до картинки (или только название, если используется default dir) с расширением файла" />
+      </tooltip>
    </TextField>
 </AnchorPane>

@@ -9,14 +9,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static github.otowave.album.AlbumManager.uploadMusicInAlbum;
 import static github.otowave.data.AlbumDataHandler.deleteAlbum;
 import static github.otowave.data.AlbumDataHandler.uploadAlbum;
 import static github.otowave.data.ImageDataHandler.uploadImage;
-import static github.otowave.data.MusicDataHandler.deleteMusic;
+import static github.otowave.otowaveutool.CommonUtils.disableTooltips;
 import static github.otowave.otowaveutool.StatusUpdater.*;
+import static github.otowave.settings.SettingsManager.getSetting;
 
 public class AlbumController implements Initializable {
     @FXML
@@ -24,14 +26,23 @@ public class AlbumController implements Initializable {
     @FXML
     private Text ttStatus;
     @FXML
-    private Tooltip ttipDeleteLast;
+    private Tooltip ttipDeleteLast, ttipAuthor, ttipAlbumDir, ttipCover;
     @FXML
     private TextField tfTitle, tfAuthor, tfAlbumDir, tfCoverPath;
+    private boolean isUseTooltips;
     private String albumId;
     private String imageId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        isUseTooltips = Boolean.parseBoolean(getSetting("enableTooltips"));
+        if(!isUseTooltips) {
+            ArrayList<Tooltip> tooltips = new ArrayList<>(){{
+                add(ttipAuthor); add(ttipAlbumDir); add(ttipCover);
+            }};
+            disableTooltips(tooltips);
+        }
+
         setWaitStatus(ttStatus, ivSticker);
     }
 

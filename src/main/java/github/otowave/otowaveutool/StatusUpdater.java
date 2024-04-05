@@ -24,7 +24,7 @@ public class StatusUpdater {
         imageView.setImage(sticker);
 
         status.setFill(Color.GREEN);
-        status.setText(generatedId);
+        status.setText("ID: "+generatedId);
 
         suspendResetStatus(3, status, imageView);
     }

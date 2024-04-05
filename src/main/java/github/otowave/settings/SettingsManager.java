@@ -41,7 +41,7 @@ public class SettingsManager {
         setSetting("email", "");
         setSetting("password", "");
         setSetting("theme", "default");
-        setSetting("enableAnimation", "true");
+        setSetting("enableTooltips", "true");
         saveSettingsFile();
     }
 

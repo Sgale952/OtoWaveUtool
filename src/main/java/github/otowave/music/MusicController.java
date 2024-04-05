@@ -13,9 +13,12 @@ import org.jaudiotagger.tag.Tag;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
+import static github.otowave.data.AlbumDataHandler.fillPlaylist;
 import static github.otowave.data.DataHandler.getGenres;
 import static github.otowave.data.ImageDataHandler.uploadImage;
 import static github.otowave.data.MusicDataHandler.deleteMusic;
@@ -31,23 +34,32 @@ public class MusicController implements Initializable {
     @FXML
     private Text ttStatus;
     @FXML
-    private Tooltip ttipDeleteLast;
+    private Tooltip ttipDeleteLast, ttipAuthor, ttipMusicFile, ttipCoverFile, ttipSetMetadata, ttipAlbum;
     @FXML
     private MenuButton btnGenreMenu;
     @FXML
-    private TextField tfTitle, tfAuthor, tfMusicPath, tfCoverPath;
+    private TextField tfTitle, tfAuthor, tfAlbum, tfMusicPath, tfCoverPath;
     @FXML
     private CheckBox chbEcontent;
-
     private final ToggleGroup genreToggleGroup = new ToggleGroup();
     private Boolean isUseDefaultDir;
+    private Boolean isUseTooltips;
     private String musicId;
     private String userId;
+    private String albumId;
     private String imageId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         isUseDefaultDir = Boolean.parseBoolean(getSetting("useDefaultDir"));
+        isUseTooltips = Boolean.parseBoolean(getSetting("enableTooltips"));
+        if(!isUseTooltips) {
+            ArrayList<Tooltip> tooltips = new ArrayList<>(){{
+                add(ttipAuthor); add(ttipMusicFile); add(ttipCoverFile); add(ttipSetMetadata); add(ttipAlbum);
+            }};
+            disableTooltips(tooltips);
+        }
+
         setWaitStatus(ttStatus, ivSticker);
 
         try {
@@ -66,6 +78,7 @@ public class MusicController implements Initializable {
     public void upload(ActionEvent actionEvent) {
         try {
             userId = tfAuthor.getText();
+            albumId = tfAlbum.getText();
             String title = tfTitle.getText();
             String eContent = chbEcontent.isSelected()? "1" : "0";
             String genre = getToggledGenre(genreToggleGroup);
@@ -80,7 +93,11 @@ public class MusicController implements Initializable {
             musicId = uploadMusic(userId, title, eContent, genre, audioFilePath);
             imageId = uploadImage(userId, musicId, "musicCover", imageFilePath);
 
-            ttipDeleteLast.setText("MusicID = "+ musicId +"\nUserID = "+ userId +"\nImageID = "+ imageId);
+            if(!Objects.equals(albumId, "")) {
+                fillPlaylist(albumId, musicId);
+            }
+
+            ttipDeleteLast.setText("MusicID = "+ musicId + "AlbumID = "+ albumId + "\nUserID = "+ userId +"\nImageID = "+ imageId);
             setSuccessStatus(musicId, ttStatus, ivSticker);
         }
         catch (Exception e) {

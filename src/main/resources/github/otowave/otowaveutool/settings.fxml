@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -26,6 +27,9 @@
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip fx:id="ttipDefauitDir" text="default dir + file. Дефолтный путь заканчивается на \" />
+      </tooltip>
    </TextField>
    <Separator layoutX="27.0" layoutY="97.0" prefHeight="24.0" prefWidth="546.0" />
    <CheckBox fx:id="chbDefaultDir" layoutX="32.0" layoutY="29.0" mnemonicParsing="false" onAction="#saveSettings" prefHeight="25.0" prefWidth="161.0" text="use default directory">
@@ -55,14 +59,20 @@
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip fx:id="ttipEmail" text="Не используется (потребуется в будущем для верификации)" />
+      </tooltip>
    </TextField>
    <TextField fx:id="tfPassword" layoutX="134.0" layoutY="121.0" prefHeight="32.0" prefWidth="132.0" promptText="password">
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip fx:id="ttipPassword" text="Не используется (потребуется в будущем для верификации)" />
+      </tooltip>
    </TextField>
    <Separator layoutX="27.0" layoutY="153.0" prefHeight="24.0" prefWidth="546.0" />
-   <CheckBox fx:id="chbEnableAnim" layoutX="126.0" layoutY="180.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="enable animation">
+   <CheckBox fx:id="chbEnableAnim" layoutX="126.0" layoutY="180.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0" text="enable tooltips">
       <font>
          <Font size="14.0" />
       </font>
