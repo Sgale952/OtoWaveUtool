@@ -59,6 +59,9 @@
       <font>
          <Font size="14.0" />
       </font>
+      <tooltip>
+         <Tooltip fx:id="ttipDeleteLast" text="Здесь появятся значения последних id, после загрузки пользователя" />
+      </tooltip>
    </Button>
    <TextField fx:id="tfPassword" layoutX="35.0" layoutY="179.0" prefHeight="39.0" prefWidth="164.0" promptText="password">
       <font>

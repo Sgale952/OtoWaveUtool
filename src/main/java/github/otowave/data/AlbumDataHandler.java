@@ -53,7 +53,7 @@ public class AlbumDataHandler {
 
     public static void deleteAlbum(String albumId) throws Exception {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("albumId", albumId);
+        jsonObject.addProperty("softDelete", 0);
 
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody requestBody = RequestBody.create(jsonObject.toString(), mediaType);

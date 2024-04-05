@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static github.otowave.data.AuthorDataHandler.deleteUser;
 import static github.otowave.data.AuthorDataHandler.uploadUser;
 import static github.otowave.data.ImageDataHandler.uploadImage;
 import static github.otowave.otowaveutool.CommonUtils.disableTooltips;
@@ -24,12 +25,12 @@ public class AuthorController implements Initializable {
     @FXML
     private ImageView ivSticker;
     @FXML
-    private Tooltip ttipEmail, ttipAvatarFile, ttipHeaderFile;
+    private Tooltip ttipDeleteLast, ttipEmail, ttipAvatarFile, ttipHeaderFile;
     @FXML
     private TextField tfNickname, tfEmail, tfAvatarPath, tfHeaderPath, tfPassword;
     private boolean isUseDefaultDir;
     private boolean isUseTooltips;
-    private String uploaderId;
+    private String authorId;
     private String avatarId;
     private String headerId;
 
@@ -60,11 +61,22 @@ public class AuthorController implements Initializable {
         }
 
         try {
-            uploaderId = uploadUser(nickname, email, password);
-            avatarId = uploadImage(uploaderId, uploaderId, "userAvatar", avatarFile);
-            headerId = uploadImage(uploaderId, uploaderId, "userHeader", headerFile);
+            authorId = uploadUser(nickname, email, password);
+            avatarId = uploadImage(authorId, authorId, "userAvatar", avatarFile);
+            headerId = uploadImage(authorId, authorId, "userHeader", headerFile);
 
-            setSuccessStatus(uploaderId, ttStatus, ivSticker);
+            ttipDeleteLast.setText("AuthorID = "+ authorId + "AvatarID = "+ avatarId + "\nHeaderID = "+ headerId);
+            setSuccessStatus(authorId, ttStatus, ivSticker);
+        }
+        catch (Exception e) {
+            setErrorStatus(e.getMessage(), ttStatus, ivSticker);
+        }
+    }
+
+    public void deleteLastUploaded(ActionEvent actionEvent) {
+        try {
+            deleteUser(authorId);
+            setSuccessStatus(authorId, ttStatus, ivSticker);
         }
         catch (Exception e) {
             setErrorStatus(e.getMessage(), ttStatus, ivSticker);
@@ -78,6 +90,4 @@ public class AuthorController implements Initializable {
         tfHeaderPath.setText("");
         tfPassword.setText("");
     }
-
-    public void deleteLastUploaded(ActionEvent actionEvent) {}
 }

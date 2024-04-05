@@ -1,6 +1,7 @@
 package github.otowave.data;
 
 import com.google.gson.JsonObject;
+import com.google.gson.internal.bind.JsonTreeReader;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -35,5 +36,18 @@ public class AuthorDataHandler {
         }
 
         return userId;
+    }
+
+    public static void deleteUser(String userId) throws Exception {
+        Request request = new Request.Builder()
+                .url(BASE_URL + userId + "/delete")
+                .delete()
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new Exception("Error delete user");
+            }
+        }
     }
 }
