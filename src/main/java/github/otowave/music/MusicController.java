@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static github.otowave.data.AlbumDataHandler.fillPlaylist;
+import static github.otowave.data.AlbumDataHandler.fillAlbum;
 import static github.otowave.data.DataHandler.getGenres;
 import static github.otowave.data.ImageDataHandler.uploadImage;
 import static github.otowave.data.MusicDataHandler.deleteMusic;
@@ -94,7 +94,7 @@ public class MusicController implements Initializable {
             imageId = uploadImage(userId, musicId, "musicCover", imageFilePath);
 
             if(!Objects.equals(albumId, "")) {
-                fillPlaylist(albumId, musicId);
+                fillAlbum(albumId, musicId);
             }
 
             ttipDeleteLast.setText("MusicID = "+ musicId + "AlbumID = "+ albumId + "\nUserID = "+ userId +"\nImageID = "+ imageId);

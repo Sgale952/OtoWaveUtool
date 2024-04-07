@@ -14,8 +14,8 @@ public class AlbumDataHandler {
         AlbumData albumData = new AlbumData(1, 1, title);
         String json = gson.toJson(albumData);
 
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(json, JSON);
+        MediaType jsonData = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create(json, jsonData);
         Request request = new Request.Builder()
                 .url(BASE_URL +authorId+"/new-playlist")
                 .post(body)
@@ -32,7 +32,7 @@ public class AlbumDataHandler {
         return albumId;
     }
 
-    public static void fillPlaylist(String playlistId, String musicId) throws Exception {
+    public static void fillAlbum(String albumId, String musicId) throws Exception {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("musicId", musicId);
 
@@ -40,7 +40,7 @@ public class AlbumDataHandler {
         RequestBody requestBody = RequestBody.create(jsonObject.toString(), mediaType);
 
         Request request = new Request.Builder()
-                .url(BASE_URL + playlistId + "/fill-playlist")
+                .url(BASE_URL + albumId + "/fill-playlist")
                 .post(requestBody)
                 .build();
 

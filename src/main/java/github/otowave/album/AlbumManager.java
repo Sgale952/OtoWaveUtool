@@ -7,7 +7,7 @@ import org.jaudiotagger.tag.Tag;
 
 import java.io.File;
 
-import static github.otowave.data.AlbumDataHandler.fillPlaylist;
+import static github.otowave.data.AlbumDataHandler.fillAlbum;
 import static github.otowave.data.ImageDataHandler.applyImage;
 import static github.otowave.data.MusicDataHandler.uploadMusic;
 
@@ -21,7 +21,7 @@ public class AlbumManager {
             Tag tag = audio.getTagOrCreateDefault();
             String lastMusicId = uploadMusic(authorId, tag.getFirst(FieldKey.TITLE), tag.getFirst(FieldKey.CUSTOM1), tag.getFirst(FieldKey.GENRE), file.getAbsoluteFile().toString());
             applyImage(authorId, imageId, lastMusicId, "musicCover");
-            fillPlaylist(albumId, lastMusicId);
+            fillAlbum(albumId, lastMusicId);
         }
 
         return "";

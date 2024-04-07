@@ -65,7 +65,7 @@ public class AuthorController implements Initializable {
             avatarId = uploadImage(authorId, authorId, "userAvatar", avatarFile);
             headerId = uploadImage(authorId, authorId, "userHeader", headerFile);
 
-            ttipDeleteLast.setText("AuthorID = "+ authorId + "AvatarID = "+ avatarId + "\nHeaderID = "+ headerId);
+            ttipDeleteLast.setText("AuthorID = "+ authorId + "\nAvatarID = "+ avatarId + "\nHeaderID = "+ headerId);
             setSuccessStatus(authorId, ttStatus, ivSticker);
         }
         catch (Exception e) {

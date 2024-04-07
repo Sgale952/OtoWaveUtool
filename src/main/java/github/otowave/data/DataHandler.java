@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class DataHandler {
-    static final String BASE_URL = "http://0.0.0.0:4567/";
+    static final String BASE_URL = "http://172.24.80.146:4567/";
     static final Gson gson = new Gson();
     static final OkHttpClient client = new OkHttpClient.Builder()
             .readTimeout(0, TimeUnit.SECONDS)

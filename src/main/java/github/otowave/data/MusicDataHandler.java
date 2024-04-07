@@ -23,7 +23,7 @@ public class MusicDataHandler {
                 .build();
 
         Request request = new Request.Builder()
-                .url(DataHandler.BASE_URL +authorId+"/new-song")
+                .url(DataHandler.BASE_URL +authorId+"/new-music")
                 .post(requestBody)
                 .build();
 
@@ -46,7 +46,7 @@ public class MusicDataHandler {
         RequestBody requestBody = RequestBody.create(jsonObject.toString(), mediaType);
 
         Request request = new Request.Builder()
-                .url(BASE_URL + userId + "/" + musicId + "/delete-song")
+                .url(BASE_URL + userId + "/" + musicId + "/delete-music")
                 .delete(requestBody)
                 .build();
 

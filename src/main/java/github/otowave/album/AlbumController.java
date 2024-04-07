@@ -29,12 +29,14 @@ public class AlbumController implements Initializable {
     private Tooltip ttipDeleteLast, ttipAuthor, ttipAlbumDir, ttipCover;
     @FXML
     private TextField tfTitle, tfAuthor, tfAlbumDir, tfCoverPath;
+    private Boolean isUseDefaultDir;
     private boolean isUseTooltips;
     private String albumId;
     private String imageId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        isUseDefaultDir = Boolean.parseBoolean(getSetting("useDefaultDir"));
         isUseTooltips = Boolean.parseBoolean(getSetting("enableTooltips"));
         if(!isUseTooltips) {
             ArrayList<Tooltip> tooltips = new ArrayList<>(){{
@@ -51,6 +53,10 @@ public class AlbumController implements Initializable {
         String title = tfTitle.getText();
         String albumDir = tfAlbumDir.getText();
         String coverPath = tfCoverPath.getText();
+
+        if(isUseDefaultDir) {
+            coverPath = getSetting("defaultDir") + coverPath;
+        }
 
         try {
             albumId = uploadAlbum(authorId, title);
